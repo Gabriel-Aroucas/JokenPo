@@ -7,6 +7,8 @@ import { useState } from "react";
 const App = () => {
 
   const [choice, setchoice] = useState(Unknown)
+  const [choiceP2, setchoiceP2] = useState(Unknown)
+ 
   const menuOfChoice = [
     {
       id:'1',
@@ -32,8 +34,25 @@ const App = () => {
 
     },
   ];
+ const menuOfChoice_List = menuOfChoice.map(e => 
+            <img src={e.image} title={e.title} alt={e.alt} onClick={e.click} key={e.id} />
+        )
 
-  
+
+  const playGame = ()=>{
+    const animation = setInterval(()=>{
+      const images = [HandRock,Hand,HandScissors];
+      const random = Math.floor(Math.random()*3);
+      const result = images[random];
+            console.log(result)
+      setchoiceP2(result)
+    },300)
+
+    setTimeout(() => {
+      clearInterval(animation);      
+    }, 2000);
+    
+  }
   return (
     <>
       <header className="score">
@@ -41,7 +60,6 @@ const App = () => {
         <span>x</span>
         <span>0</span>
       </header>
-
       <section className="modalOfPlayers">
         <div className="modalPlayerOne">
           <img src={choice} width={"250px"} alt="the choice player image" />
@@ -50,20 +68,18 @@ const App = () => {
           <span>x</span>
         </div>
         <div className="modalPlayerTwo">
-          <img src={Unknown} width={"250px"} alt="the choice player image" />
+          <img src={choiceP2} width={"250px"} alt="the choice player image" />
         </div>
       </section>
 
       <section className="menuOfChoice">
-        {menuOfChoice.map((e) => {
-          return (
-            <img src={e.image} title={e.title} alt={e.alt} onClick={e.click} key={e.id} />
-          );
-        })}
+          <ul>
+            {menuOfChoice_List}
+          </ul>
       </section>
 
       <section className="buttonPlayGame">
-        <button type="button" >Jogar</button>
+        <button type="button" onClick={playGame} >Jogar</button>
       </section>
     </>
   );
