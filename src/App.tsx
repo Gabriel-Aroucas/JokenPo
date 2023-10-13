@@ -3,7 +3,7 @@ import HandRock from "./assets/HandRock.png";
 import Hand from "./assets/Hand.png";
 import HandScissors from "./assets/HandScissors.png";
 import Unknown from "./assets/unknown.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const App = () => {
 
   const [choice, setchoice] = useState(Unknown)
@@ -35,21 +35,28 @@ const App = () => {
     },
   ];
  const menuOfChoice_List = menuOfChoice.map(e => 
-            <img src={e.image} title={e.title} alt={e.alt} onClick={e.click} key={e.id} />
+           <li key={e.id}> <img src={e.image} title={e.title} alt={e.alt} onClick={e.click}  /></li>
         )
 
+        useEffect(()=>{
+            validate()
+        })
+
+const validate =()=>{
+    const buttonDisabled  = document.querySelector('button')?.setAttribute('disabled','');
+    const validate_options = {
+        invalid_options:choice &&choiceP2 == Unknown ? buttonDisabled :'',
+    }
+    validate_options
+    
+    }
 
   const playGame = ()=>{
-    const animation = setInterval(()=>{
-      const images = [HandRock,Hand,HandScissors];
-      const random = Math.floor(Math.random()*3);
-      const result = images[random];
-            console.log(result)
-      setchoiceP2(result)
-    },300)
-
     setTimeout(() => {
-      clearInterval(animation);      
+        const images = [HandRock,Hand,HandScissors];
+        const random = Math.floor(Math.random()*3);
+        const result = images[random];
+      setchoiceP2(result)
     }, 2000);
     
   }

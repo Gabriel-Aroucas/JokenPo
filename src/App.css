@@ -57,8 +57,16 @@ header span:nth-child(2){
   align-items: center;
   border-radius: 2px;
 }
-.menuOfChoice img{
-  max-width: 4vw;
+.menuOfChoice ul{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.menuOfChoice ul li{
+  list-style: none;
+}
+.menuOfChoice ul li img{
+  max-width: 4rem;
   cursor:pointer;
 }
 .buttonPlayGame{
@@ -68,9 +76,12 @@ header span:nth-child(2){
 .buttonPlayGame button{
   padding: 1rem 3rem;
 }
-@media screen and (max-width:400px){
+@media screen and (max-width:500px){
   .menuOfChoice{
     width: 90%;
+  }
+  .menuOfChoice ul li img{
+    max-width: 15vw;
   }
   .modalPlayerOne img, .modalPlayerTwo img{
     max-width: 30vw;
