@@ -8,7 +8,9 @@ const App = () => {
 
   const [choice, setchoice] = useState(Unknown)
   const [choiceP2, setchoiceP2] = useState(Unknown)
-  const buttonActive = document.querySelector('button')?.removeAttribute('disabled');
+  const [pointsP1, setpointsP1] = useState(0);
+  const [pointsP2, setpointsP2] = useState(0);
+  const [round, setround]=useState(0);
 
  const menuOfChoice = [
     
@@ -17,14 +19,14 @@ const App = () => {
       image: HandRock,
       title: "Hand Rock",
       alt: "An image of a Hand Rock",
-      click: () => {setchoice(HandRock); buttonActive },
+      click: () => setchoice(HandRock),
     },
     {
       id:'2',
       image: Hand,
       title: "Hand Open",
       alt: "An image of a Hand Open",
-      click: () => {setchoice(Hand); buttonActive },
+      click: () => setchoice(Hand),
 
     },
     {
@@ -32,7 +34,7 @@ const App = () => {
       image: HandScissors,
       title: "Hand Scissor",
       alt: "An image of a Hand Scissor",
-      click: () => {setchoice(HandScissors); buttonActive },
+      click: () => setchoice(HandScissors),
 
     },
   ];
@@ -40,18 +42,35 @@ const App = () => {
            <li key={e.id}> <img src={e.image} title={e.title} alt={e.alt} onClick={e.click}  /></li>
         )
 
+
+const validate_Win =()=>{
+    setpointsP1(pointsP1+1)
+    alert('win')
+
+
+}
+const validate_Drawn =()=>{
+    setpointsP1(pointsP1+1);
+    setpointsP2(pointsP2+1);
+    alert('drawn')
+}
+const validate_Loose =()=>{
+    setpointsP2(pointsP2+1);
+    alert('loose')
+    
+}
+
 useEffect(()=>{
-            validate()
-        })
+    validate()
+},[round])
 
 const validate =()=>{
 
-
     const validate_options = {
-
-        rock_win: choice == HandRock && choiceP2 == HandScissors ? alert('win') : '',
-        rock_drawn: choice == HandRock && choiceP2 == HandRock ? alert('drawn') : '',
-        rock_loose: choice == HandRock && choiceP2 == Hand ? alert('loose') : '',
+        invalid_option : choice == Unknown ? setchoiceP2(Unknown) : '',
+        rock_win: choice == HandRock && choiceP2 == HandScissors ? validate_Win() : '',
+        rock_drawn: choice == HandRock && choiceP2 == HandRock ? validate_Drawn() : '',
+        rock_loose: choice == HandRock && choiceP2 == Hand ? validate_Loose() : '',
 
         hand_win: choice == Hand && choiceP2 == HandRock ? alert('win') : '',
         hand_drawn: choice == Hand && choiceP2 == Hand ? alert('drawn') : '',
@@ -65,21 +84,21 @@ const validate =()=>{
     
     }
 
-  const playGame = ()=>{
-    setTimeout(() => {
+  const playGame =  ()=>{
+     setround(round+1)
         const images = [HandRock,Hand,HandScissors];
         const random = Math.floor(Math.random()*3);
         const result = images[random];
-      setchoiceP2(result)
-    }, 2000);
-    
+        setchoiceP2(result)
   }
+
+  
   return (
     <>
       <header className="score">
-        <span>0</span>
+        <span>{pointsP1}</span>
         <span>x</span>
-        <span>0</span>
+        <span>{pointsP2}</span>
       </header>
       <section className="modalOfPlayers">
         <div className="modalPlayerOne">
@@ -100,7 +119,7 @@ const validate =()=>{
       </section>
 
       <section className="buttonPlayGame">
-        <button type="button" onClick={playGame} disabled>Jogar</button>
+        <button type="button" id="btnPlayGame" onClick={playGame}>Jogar</button>
       </section>
     </>
   );
