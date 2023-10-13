@@ -8,21 +8,23 @@ const App = () => {
 
   const [choice, setchoice] = useState(Unknown)
   const [choiceP2, setchoiceP2] = useState(Unknown)
- 
-  const menuOfChoice = [
+  const buttonActive = document.querySelector('button')?.removeAttribute('disabled');
+
+ const menuOfChoice = [
+    
     {
       id:'1',
       image: HandRock,
       title: "Hand Rock",
       alt: "An image of a Hand Rock",
-      click: () => setchoice(HandRock),
+      click: () => {setchoice(HandRock); buttonActive },
     },
     {
       id:'2',
       image: Hand,
       title: "Hand Open",
       alt: "An image of a Hand Open",
-      click: () => setchoice(Hand),
+      click: () => {setchoice(Hand); buttonActive },
 
     },
     {
@@ -30,7 +32,7 @@ const App = () => {
       image: HandScissors,
       title: "Hand Scissor",
       alt: "An image of a Hand Scissor",
-      click: () => setchoice(HandScissors),
+      click: () => {setchoice(HandScissors); buttonActive },
 
     },
   ];
@@ -43,9 +45,9 @@ useEffect(()=>{
         })
 
 const validate =()=>{
-    const buttonDisabled  = document.querySelector('button')?.setAttribute('disabled','');
+
+
     const validate_options = {
-        invalid_options:choice &&choiceP2 == Unknown ? buttonDisabled :'',
 
         rock_win: choice == HandRock && choiceP2 == HandScissors ? alert('win') : '',
         rock_drawn: choice == HandRock && choiceP2 == HandRock ? alert('drawn') : '',
@@ -98,7 +100,7 @@ const validate =()=>{
       </section>
 
       <section className="buttonPlayGame">
-        <button type="button" onClick={playGame} >Jogar</button>
+        <button type="button" onClick={playGame} disabled>Jogar</button>
       </section>
     </>
   );
