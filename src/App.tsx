@@ -4,13 +4,15 @@ import Hand from "./assets/Hand.png";
 import HandScissors from "./assets/HandScissors.png";
 import Unknown from "./assets/unknown.png";
 import { useEffect, useState } from "react";
+import Modal from "./components/modal/Modal";
 const App = () => {
-
+    
   const [choice, setchoice] = useState(Unknown)
   const [choiceP2, setchoiceP2] = useState(Unknown)
   const [pointsP1, setpointsP1] = useState(0);
   const [pointsP2, setpointsP2] = useState(0);
   const [round, setround]=useState(0);
+  const [winner, setwinner] = useState('');
 
  const menuOfChoice = [
     
@@ -40,13 +42,11 @@ const App = () => {
   ];
  const menuOfChoice_List = menuOfChoice.map(e => 
            <li key={e.id}> <img src={e.image} title={e.title} alt={e.alt} onClick={e.click}  /></li>
-        )
-
-
-const validate_Win =()=>{
+)
+const validate_Win =(winnerName:string)=>{
     setpointsP1(pointsP1+1)
-    alert('win')
-
+    setwinner(winnerName)
+    console.log(winner)
 
 }
 const validate_Drawn =()=>{
@@ -68,7 +68,7 @@ const validate =()=>{
 
     const validate_options = {
         invalid_option : choice == Unknown ? setchoiceP2(Unknown) : '',
-        rock_win: choice == HandRock && choiceP2 == HandScissors ? validate_Win() : '',
+        rock_win: choice == HandRock && choiceP2 == HandScissors ? validate_Win('rock') : '',
         rock_drawn: choice == HandRock && choiceP2 == HandRock ? validate_Drawn() : '',
         rock_loose: choice == HandRock && choiceP2 == Hand ? validate_Loose() : '',
 
@@ -82,7 +82,7 @@ const validate =()=>{
     }
     validate_options
     
-    }
+}
 
   const playGame =  ()=>{
      setround(round+1)
@@ -90,11 +90,12 @@ const validate =()=>{
         const random = Math.floor(Math.random()*3);
         const result = images[random];
         setchoiceP2(result)
-  }
+}
 
   
   return (
     <>
+    <Modal Title='Oxford'/>
       <header className="score">
         <span>{pointsP1}</span>
         <span>x</span>
