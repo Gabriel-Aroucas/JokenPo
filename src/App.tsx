@@ -13,6 +13,8 @@ const App = () => {
   const [pointsP2, setpointsP2] = useState(0);
   const [round, setround]=useState(0);
   const [winner, setwinner] = useState('');
+  const modal = document.querySelector(".Modal_bg") as HTMLElement;
+
 
  const menuOfChoice = [
     
@@ -46,17 +48,20 @@ const App = () => {
 const validate_Win =(winnerName:string)=>{
     setpointsP1(pointsP1+1)
     setwinner(winnerName)
-    console.log(winner)
+    modal.style.display='block';
 
 }
-const validate_Drawn =()=>{
+const validate_Drawn =(winnerName:string)=>{
     setpointsP1(pointsP1+1);
     setpointsP2(pointsP2+1);
-    alert('drawn')
+    setwinner(winnerName)
+    modal.style.display='block';
 }
-const validate_Loose =()=>{
+const validate_Loose =(winnerName:string)=>{
     setpointsP2(pointsP2+1);
-    alert('loose')
+    setwinner(winnerName)
+    modal.style.display='block';
+
     
 }
 
@@ -65,20 +70,23 @@ useEffect(()=>{
 },[round])
 
 const validate =()=>{
+    const win_Text = 'Você venceu !';
+    const drawn_Text = 'Empate !';
+    const loose_Text = 'Você perdeu !';
 
     const validate_options = {
         invalid_option : choice == Unknown ? setchoiceP2(Unknown) : '',
-        rock_win: choice == HandRock && choiceP2 == HandScissors ? validate_Win('rock') : '',
-        rock_drawn: choice == HandRock && choiceP2 == HandRock ? validate_Drawn() : '',
-        rock_loose: choice == HandRock && choiceP2 == Hand ? validate_Loose() : '',
+        rock_win: choice == HandRock && choiceP2 == HandScissors ? validate_Win(win_Text) : '',
+        rock_drawn: choice == HandRock && choiceP2 == HandRock ? validate_Drawn(drawn_Text) : '',
+        rock_loose: choice == HandRock && choiceP2 == Hand ? validate_Loose(loose_Text) : '',
 
-        hand_win: choice == Hand && choiceP2 == HandRock ? alert('win') : '',
-        hand_drawn: choice == Hand && choiceP2 == Hand ? alert('drawn') : '',
-        hand_loose: choice == Hand && choiceP2 == HandScissors ? alert('loose') : '',
+        hand_win: choice == Hand && choiceP2 == HandRock ? validate_Win(win_Text) : '',
+        hand_drawn: choice == Hand && choiceP2 == Hand ? validate_Drawn(drawn_Text) : '',
+        hand_loose: choice == Hand && choiceP2 == HandScissors ? validate_Loose(loose_Text) : '',
 
-        scissor_win: choice == HandScissors && choiceP2 == Hand ? alert('win') : '',
-        scissor_drawn: choice == HandScissors && choiceP2 == HandScissors ? alert('drawn') : '',
-        scissor_loose: choice == HandScissors && choiceP2 == HandRock ? alert('loose') : '',
+        scissor_win: choice == HandScissors && choiceP2 == Hand ? validate_Win(win_Text) : '',
+        scissor_drawn: choice == HandScissors && choiceP2 == HandScissors ? validate_Drawn(drawn_Text) : '',
+        scissor_loose: choice == HandScissors && choiceP2 == HandRock ? validate_Loose(loose_Text) : '',
     }
     validate_options
     
@@ -95,7 +103,7 @@ const validate =()=>{
   
   return (
     <>
-    <Modal Title='Oxford'/>
+    <Modal title={winner}/>
       <header className="score">
         <span>{pointsP1}</span>
         <span>x</span>

@@ -1,14 +1,15 @@
-interface = {
-    props:string,
+interface Model {
+    title:string,
 }
-export type Title = "Oxford";
-const Modal = (props:interface) => {
+const Modal = (props:Model) => {
   return (
     <section className="Modal_bg">
       <div className="Modal">
-        <h1>{props.name as Title}</h1>
+        <h1>{props.title}</h1>
         <p>api de frases</p>
-        <button type="button">ok</button>
+        <button type="button" onClick={()=> {
+            const modal = document.querySelector(".Modal_bg") as HTMLElement;
+            modal.style.display='none'}}>ok</button>
       </div>
     </section>
   );
