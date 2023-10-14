@@ -100,13 +100,16 @@ header span:nth-child(2){
   font-size: 3rem;
 }
 .Modal p{
-  margin: 5px 0;
+  margin: 1rem 0;
 }
 .Modal button{
   padding: 1rem 3rem;
 }
 @media screen and (max-width:500px){
   .menuOfChoice{
+    width: 90%;
+  }
+  .Modal{
     width: 90%;
   }
   .menuOfChoice ul li img{
