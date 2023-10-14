@@ -67,10 +67,13 @@ const validate_Loose =(winnerName:string)=>{
 }
 
 useEffect(()=>{
-  fetch("https://api.adviceslip.com/advice")
+  fetch("https://json-server-tim1.vercel.app/frases")
         .then (response => response.json())
-        .then (data => setmodalText(data.slip.advice))
-        
+        .then (data => {
+          const randomize = Math.floor(Math.random()*data.length)
+          setmodalText(data[randomize].text)
+        })
+
   setTimeout(()=>{
     validate()
   },1000)
