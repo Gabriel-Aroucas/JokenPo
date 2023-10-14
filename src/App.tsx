@@ -13,9 +13,10 @@ const App = () => {
   const [pointsP2, setpointsP2] = useState(0);
   const [round, setround]=useState(0);
   const [winner, setwinner] = useState('');
+  const [modalText, setmodalText] =useState('');
   const modal = document.querySelector(".Modal_bg") as HTMLElement;
 
-
+  
  const menuOfChoice = [
     
     {
@@ -23,14 +24,14 @@ const App = () => {
       image: HandRock,
       title: "Hand Rock",
       alt: "An image of a Hand Rock",
-      click: () => setchoice(HandRock),
+      click: () => {setchoice(HandRock); setchoiceP2(Unknown)},
     },
     {
       id:'2',
       image: Hand,
       title: "Hand Open",
       alt: "An image of a Hand Open",
-      click: () => setchoice(Hand),
+      click: () => {setchoice(Hand); setchoiceP2(Unknown)},
 
     },
     {
@@ -38,7 +39,7 @@ const App = () => {
       image: HandScissors,
       title: "Hand Scissor",
       alt: "An image of a Hand Scissor",
-      click: () => setchoice(HandScissors),
+      click: () => {setchoice(HandScissors); setchoiceP2(Unknown)},
 
     },
   ];
@@ -66,7 +67,13 @@ const validate_Loose =(winnerName:string)=>{
 }
 
 useEffect(()=>{
+  fetch("https://api.adviceslip.com/advice")
+        .then (response => response.json())
+        .then (data => setmodalText(data.slip.advice))
+        
+  setTimeout(()=>{
     validate()
+  },1000)
 },[round])
 
 const validate =()=>{
@@ -93,17 +100,20 @@ const validate =()=>{
 }
 
   const playGame =  ()=>{
-     setround(round+1)
+       setround(round+1)
         const images = [HandRock,Hand,HandScissors];
         const random = Math.floor(Math.random()*3);
         const result = images[random];
         setchoiceP2(result)
+
+        
+      
 }
 
-  
+
   return (
     <>
-    <Modal title={winner}/>
+    <Modal title={winner} text={modalText}/>
       <header className="score">
         <span>{pointsP1}</span>
         <span>x</span>
