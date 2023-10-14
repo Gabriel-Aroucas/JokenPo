@@ -85,7 +85,6 @@ const validate =()=>{
     const loose_Text = 'Você perdeu !';
 
     const validate_options = {
-        invalid_option : choice == Unknown ? setchoiceP2(Unknown) : '',
         rock_win: choice == HandRock && choiceP2 == HandScissors ? validate_Win(win_Text) : '',
         rock_drawn: choice == HandRock && choiceP2 == HandRock ? validate_Drawn(drawn_Text) : '',
         rock_loose: choice == HandRock && choiceP2 == Hand ? validate_Loose(loose_Text) : '',
@@ -101,17 +100,23 @@ const validate =()=>{
     validate_options
     
 }
+  const animation_images =()=>{
 
+    const images = [HandRock,Hand,HandScissors];
+    const random = Math.floor(Math.random()*3);
+    const result = images[random];
+    setchoiceP2(result)
+
+  }
   const playGame =  ()=>{
+      if(choice != Unknown){
        setround(round+1)
-        const images = [HandRock,Hand,HandScissors];
-        const random = Math.floor(Math.random()*3);
-        const result = images[random];
-        setchoiceP2(result)
-
-        
-      
-}
+       validate()
+       animation_images()      
+      }else{
+        alert('Error'+'\n'+'você precisa selecionar ao menos uma opção')
+      }
+    }
 
 
   return (
