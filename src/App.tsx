@@ -89,40 +89,17 @@ const App = () => {
     const loose_Text = "Você perdeu !";
 
     const validate_options = {
-      rock_win:
-        choice == HandRock && choiceP2 == HandScissors
-          ? validate_Win(win_Text)
-          : "",
-      rock_drawn:
-        choice == HandRock && choiceP2 == HandRock
-          ? validate_Drawn(drawn_Text)
-          : "",
-      rock_loose:
-        choice == HandRock && choiceP2 == Hand
-          ? validate_Loose(loose_Text)
-          : "",
+      rock_win: choice == HandRock && choiceP2 == HandScissors ? validate_Win(win_Text): "",
+      rock_drawn:choice == HandRock && choiceP2 == HandRock ? validate_Drawn(drawn_Text): "",
+      rock_loose: choice == HandRock && choiceP2 == Hand ? validate_Loose(loose_Text): "",
 
-      hand_win:
-        choice == Hand && choiceP2 == HandRock ? validate_Win(win_Text) : "",
-      hand_drawn:
-        choice == Hand && choiceP2 == Hand ? validate_Drawn(drawn_Text) : "",
-      hand_loose:
-        choice == Hand && choiceP2 == HandScissors
-          ? validate_Loose(loose_Text)
-          : "",
+      hand_win:choice == Hand && choiceP2 == HandRock ? validate_Win(win_Text) : "",
+      hand_drawn:choice == Hand && choiceP2 == Hand ? validate_Drawn(drawn_Text) : "",
+      hand_loose:choice == Hand && choiceP2 == HandScissors ? validate_Loose(loose_Text): "",
 
-      scissor_win:
-        choice == HandScissors && choiceP2 == Hand
-          ? validate_Win(win_Text)
-          : "",
-      scissor_drawn:
-        choice == HandScissors && choiceP2 == HandScissors
-          ? validate_Drawn(drawn_Text)
-          : "",
-      scissor_loose:
-        choice == HandScissors && choiceP2 == HandRock
-          ? validate_Loose(loose_Text)
-          : "",
+      scissor_win:choice == HandScissors && choiceP2 == Hand ? validate_Win(win_Text) : "",
+      scissor_drawn:choice == HandScissors && choiceP2 == HandScissors ? validate_Drawn(drawn_Text) : "",
+      scissor_loose:choice == HandScissors && choiceP2 == HandRock ? validate_Loose(loose_Text) : "",
     };
     validate_options;
   };
@@ -132,8 +109,13 @@ const App = () => {
     const result = images[random];
     setchoiceP2(result);
   };
+  const disable_Button_PlayGame =()=>{
+    const button_playGame = document.querySelector("#btnPlayGame")
+    button_playGame?.setAttribute("Disabled","")
+  }
   const playGame = () => {
     if (choice != Unknown) {
+      disable_Button_PlayGame()
       setround(round + 1);
       validate();
       animation_images();
