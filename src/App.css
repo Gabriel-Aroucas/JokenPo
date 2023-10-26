@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+audio{
+  display: block;
+}
 body{
   background-color: black;
   color: #fff;
@@ -75,6 +78,7 @@ header span:nth-child(2){
 }
 .buttonPlayGame button{
   padding: 1rem 3rem;
+  cursor: pointer;
 }
 .Modal_bg{
   position: absolute;
