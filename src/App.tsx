@@ -15,7 +15,7 @@ const App = () => {
   const [modalText, setmodalText] = useState("");
   const modal = document.querySelector(".Modal_bg") as HTMLElement;
 
-  const menuOfChoice = [
+  const menu_Of_Choice = [
     {
       id: "1",
       image: HandRock,
@@ -47,28 +47,12 @@ const App = () => {
       },
     },
   ];
-  const menuOfChoice_List = menuOfChoice.map((e) => (
+  const menu_Of_Choice_List = menu_Of_Choice.map((e) => (
     <li key={e.id}>
       {" "}
       <img src={e.image} title={e.title} alt={e.alt} onClick={e.click} />
     </li>
   ));
-  const validate_Win = (winnerName: string) => {
-    setpointsP1(pointsP1 + 1);
-    setwinner(winnerName);
-    modal.style.display = "block";
-  };
-  const validate_Drawn = (winnerName: string) => {
-    setpointsP1(pointsP1 + 1);
-    setpointsP2(pointsP2 + 1);
-    setwinner(winnerName);
-    modal.style.display = "block";
-  };
-  const validate_Loose = (winnerName: string) => {
-    setpointsP2(pointsP2 + 1);
-    setwinner(winnerName);
-    modal.style.display = "block";
-  };
 
   useEffect(() => {
     fetch("https://json-server-tim1.vercel.app/frases")
@@ -79,46 +63,65 @@ const App = () => {
       });
 
     setTimeout(() => {
-      validate();
+      validate_Win_or_Loose();
     }, 1000);
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [round]);
 
-  const validate = () => {
+  const validate_Win_or_Loose = () => {
     const win_Text = "Você venceu !";
     const drawn_Text = "Empate !";
     const loose_Text = "Você perdeu !";
 
     const validate_options = {
-      rock_win: choice == HandRock && choiceP2 == HandScissors ? validate_Win(win_Text): "",
-      rock_drawn:choice == HandRock && choiceP2 == HandRock ? validate_Drawn(drawn_Text): "",
-      rock_loose: choice == HandRock && choiceP2 == Hand ? validate_Loose(loose_Text): "",
+      rock_win: choice == HandRock && choiceP2 == HandScissors ? case_Win(win_Text): "",
+      rock_drawn:choice == HandRock && choiceP2 == HandRock ? case_Drawn(drawn_Text): "",
+      rock_loose: choice == HandRock && choiceP2 == Hand ? case_Loose(loose_Text): "",
 
-      hand_win:choice == Hand && choiceP2 == HandRock ? validate_Win(win_Text) : "",
-      hand_drawn:choice == Hand && choiceP2 == Hand ? validate_Drawn(drawn_Text) : "",
-      hand_loose:choice == Hand && choiceP2 == HandScissors ? validate_Loose(loose_Text): "",
+      hand_win:choice == Hand && choiceP2 == HandRock ? case_Win(win_Text) : "",
+      hand_drawn:choice == Hand && choiceP2 == Hand ? case_Drawn(drawn_Text) : "",
+      hand_loose:choice == Hand && choiceP2 == HandScissors ? case_Loose(loose_Text): "",
 
-      scissor_win:choice == HandScissors && choiceP2 == Hand ? validate_Win(win_Text) : "",
-      scissor_drawn:choice == HandScissors && choiceP2 == HandScissors ? validate_Drawn(drawn_Text) : "",
-      scissor_loose:choice == HandScissors && choiceP2 == HandRock ? validate_Loose(loose_Text) : "",
+      scissor_win:choice == HandScissors && choiceP2 == Hand ? case_Win(win_Text) : "",
+      scissor_drawn:choice == HandScissors && choiceP2 == HandScissors ? case_Drawn(drawn_Text) : "",
+      scissor_loose:choice == HandScissors && choiceP2 == HandRock ? case_Loose(loose_Text) : "",
     };
     validate_options;
   };
-  const animation_images = () => {
+  const case_Win = (winnerName: string) => {
+    setpointsP1(pointsP1 + 1);
+    setwinner(winnerName);
+    modal.style.display = "block";
+  };
+  const case_Drawn = (winnerName: string) => {
+    setpointsP1(pointsP1 + 1);
+    setpointsP2(pointsP2 + 1);
+    setwinner(winnerName);
+    modal.style.display = "block";
+  };
+  const case_Loose = (winnerName: string) => {
+    setpointsP2(pointsP2 + 1);
+    setwinner(winnerName);
+    modal.style.display = "block";
+  };
+
+  const player_Two_animation_images = () => {
     const images = [HandRock, Hand, HandScissors];
     const random = Math.floor(Math.random() * 3);
     const result = images[random];
     setchoiceP2(result);
   };
-  const disable_Button_PlayGame =()=>{
-    const button_playGame = document.querySelector("#btnPlayGame")
-    button_playGame?.setAttribute("Disabled","")
+  const disable_Button_Play_Game =()=>{
+    const button_play_Game = document.querySelector("#button_Play_Game")
+    button_play_Game?.setAttribute("Disabled","")
   }
-  const playGame = () => {
+  const button_play_Game = () => {
     if (choice != Unknown) {
-      disable_Button_PlayGame()
+      disable_Button_Play_Game()
       setround(round + 1);
-      validate();
-      animation_images();
+      validate_Win_or_Loose();
+      player_Two_animation_images();
     } else {
       alert("Error" + "\n" + "você precisa selecionar ao menos uma opção");
     }
@@ -144,12 +147,12 @@ const App = () => {
         </div>
       </section>
 
-      <section className="menuOfChoice">
-        <ul>{menuOfChoice_List}</ul>
+      <section className="menu_Of_Choice">
+        <ul>{menu_Of_Choice_List}</ul>
       </section>
 
-      <section className="buttonPlayGame">
-        <button type="button" id="btnPlayGame" onClick={playGame}>
+      <section className="button_Play_Game">
+        <button type="button" id="button_Play_Game" onClick={button_play_Game}>
           Jogar
         </button>
       </section>

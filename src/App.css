@@ -50,7 +50,7 @@ header span:nth-child(2){
   border-radius: 50%;
   max-width: 150px;
 }
-.menuOfChoice{
+.menu_Of_Choice{
   background-color: #0c0c0c;
   width: 50%;
   margin: 0 auto;
@@ -60,23 +60,23 @@ header span:nth-child(2){
   align-items: center;
   border-radius: 2px;
 }
-.menuOfChoice ul{
+.menu_Of_Choice ul{
   display: flex;
   justify-content: space-around;
   width: 100%;
 }
-.menuOfChoice ul li{
+.menu_Of_Choice ul li{
   list-style: none;
 }
-.menuOfChoice ul li img{
+.menu_Of_Choice ul li img{
   max-width: 4rem;
   cursor:pointer;
 }
-.buttonPlayGame{
+.button_Play_Game{
   text-align: center;
   margin-top: 20px;
 }
-.buttonPlayGame button{
+.button_Play_Game button{
   padding: 1rem 3rem;
   cursor: pointer;
 }
@@ -110,13 +110,13 @@ header span:nth-child(2){
   padding: 1rem 3rem;
 }
 @media screen and (max-width:500px){
-  .menuOfChoice{
+  .menu_Of_Choice{
     width: 90%;
   }
   .Modal{
     width: 90%;
   }
-  .menuOfChoice ul li img{
+  .menu_Of_Choice ul li img{
     max-width: 15vw;
   }
   .modalPlayerOne img, .modalPlayerTwo img{
