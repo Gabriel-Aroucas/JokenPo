@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import HandRock from "../assets/HandRock.png";
 import Hand from "../assets/Hand.png";
 import HandScissors from "../assets/HandScissors.png";
-
+import { Link } from "react-router-dom";
 
 
 const Section = styled.section`
@@ -51,9 +51,14 @@ const Section = styled.section`
       flex-direction:column;
       align-items:center;
       button{
-        width:40%;
+        width:100%;
         padding:1rem;
         margin:5px 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+      }
+      a{
+        width: 40%;
       }
     }
   }
@@ -62,11 +67,18 @@ const Section = styled.section`
     .main_title {
       font-size: 10vw;
     }
+    .select_game_mode{
+      article{
+        a{
+          width:90%;
+       }
+      }
+    }
   }
 `;
 
 const Index = () => {
-
+  
   useEffect(()=>{
     setInterval(()=>{
       const palet_of_color = ['#3C3287','#EC1B32','#0293CF','#F04423','#006B5E','#FBE500','#FFF'];
@@ -81,9 +93,9 @@ const Index = () => {
       const main_image_src = document.querySelector("#main_image_src") as HTMLImageElement;
       main_image_src!.src=images[random_images]; 
 
-    },300)
+    },1000)
 
-  })
+  },[])
 
   return (
     <Section>
@@ -95,9 +107,9 @@ const Index = () => {
       <div className="select_game_mode">
         <p>escolha uma opção</p>
         <article>
-          <button type="button">Modo 1 Jogador</button>
-          <button type="button" disabled>Modo 2 Jogadores</button>
-          <button type="button" disabled> Modo Online </button>
+          <Link to="single_Mode"><button type="button">Modo 1 Jogador</button></Link>
+          <Link to="single_Mode"><button type="button" disabled>Modo 2 Jogadores</button></Link>
+          <Link to="single_Mode"><button type="button" disabled> Modo Online </button></Link>
         </article>
       </div>
     </Section>
