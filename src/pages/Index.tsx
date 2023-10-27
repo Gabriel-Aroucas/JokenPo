@@ -1,24 +1,43 @@
 import { useEffect } from "react";
 import { styled } from "styled-components";
-
+import HandRock from "../assets/HandRock.png";
+import Hand from "../assets/Hand.png";
+import HandScissors from "../assets/HandScissors.png";
 
 
 
 const Section = styled.section`
   .main_title {
+    position: relative;
     text-align: center;
     text-transform: uppercase;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     font-weight: bold;
     font-size: 3rem;
-    span{
-      color:${'red'};
-    }
-    img {
+    width: 100vw;
+    .img_border_effect{
+      position: absolute;
+      left: 50%;
+      margin-left: -130px;
+      margin-top: -5px;
+      z-index: -1;
+      background: -webkit-linear-gradient(45deg, red,yellow);
+      width:260px;
+      height: 260px;
       border-radius: 50%;
+      animation: loop 1s infinite;
     }
-  }
+    img{
+        border-radius: 50%;
+        background-color: black;
+      }
+    }
 
+
+  @keyframes loop {
+    0% {transform:rotate(0deg)}
+    100% {transform:rotate(360deg)}
+  }
   .select_game_mode {
     p {
       text-align: center;
@@ -56,13 +75,22 @@ const Index = () => {
       main_title_name!.style.color=palet_of_color[random]
     },200)
 
+    setInterval(()=>{
+      const images = [Hand,HandRock,HandScissors]
+      const random_images = Math.floor(Math.random()*images.length)
+      const main_image_src = document.querySelector("#main_image_src") as HTMLImageElement;
+      main_image_src!.src=images[random_images]; 
+
+    },300)
+
   })
 
   return (
     <Section>
       <div className="main_title">
         <h1>bem vindo ao <span id="main_title_name">jokenPo</span></h1>
-        <img src="https://placehold.co/250x250" alt="alt lorem" />
+          <div className="img_border_effect"/>
+          <img src="https://placehold.co/250x250" width="250px" id="main_image_src" alt="alt lorem" />
       </div>
       <div className="select_game_mode">
         <p>escolha uma opção</p>
