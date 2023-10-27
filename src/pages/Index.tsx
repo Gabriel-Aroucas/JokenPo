@@ -1,12 +1,8 @@
+import { useEffect } from "react";
 import { styled } from "styled-components";
 
 
 
-const colorize_main_title=()=>{
-    const palet_of_colors = ['red','green','blue','yellow','pink'];
-    const randomize_colors = Math.floor(Math.random()*palet_of_colors.length)
-    return palet_of_colors[randomize_colors]
-}
 
 const Section = styled.section`
   .main_title {
@@ -16,7 +12,7 @@ const Section = styled.section`
     font-weight: bold;
     font-size: 3rem;
     span{
-      color:${colorize_main_title};
+      color:${'red'};
     }
     img {
       border-radius: 50%;
@@ -51,10 +47,21 @@ const Section = styled.section`
 `;
 
 const Index = () => {
+
+  useEffect(()=>{
+    setInterval(()=>{
+      const palet_of_color = ['#3C3287','#EC1B32','#0293CF','#F04423','#006B5E','#FBE500','#FFF'];
+      const random = Math.floor(Math.random()*palet_of_color.length)
+      const main_title_name = document.querySelector("#main_title_name") as HTMLElement;
+      main_title_name!.style.color=palet_of_color[random]
+    },200)
+
+  })
+
   return (
     <Section>
       <div className="main_title">
-        <h1>bem vindo ao <span>jokenPo</span></h1>
+        <h1>bem vindo ao <span id="main_title_name">jokenPo</span></h1>
         <img src="https://placehold.co/250x250" alt="alt lorem" />
       </div>
       <div className="select_game_mode">
