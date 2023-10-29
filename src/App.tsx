@@ -62,6 +62,7 @@ const App = () => {
         const randomize = Math.floor(Math.random() * data.length);
         setmodalText(data[randomize].text);
         set_Remove_Loader(true)
+
       });
 
     setTimeout(() => {
