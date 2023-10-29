@@ -96,6 +96,8 @@ header span:nth-child(2){
 .button_Play_Game button{
   padding: 1rem 3rem;
   cursor: pointer;
+  border-radius: 3px;
+  border: none;
 }
 .Modal_bg{
   position: absolute;
