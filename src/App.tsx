@@ -16,7 +16,6 @@ const App = () => {
   const [modalText, setmodalText] = useState("");
   const [remove_Loader, set_Remove_Loader] = useState(false);
   const modal = document.querySelector(".Modal_bg") as HTMLElement;
-
   const menu_Of_Choice = [
     {
       id: "1",
@@ -57,14 +56,12 @@ const App = () => {
   ));
 
   useEffect(() => {
-    setTimeout(() => {
-      set_Remove_Loader(true)
-    }, 1000);
     fetch("https://json-server-tim1.vercel.app/frases")
       .then((response) => response.json())
       .then((data) => {
         const randomize = Math.floor(Math.random() * data.length);
         setmodalText(data[randomize].text);
+        set_Remove_Loader(true)
       });
 
     setTimeout(() => {

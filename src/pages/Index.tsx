@@ -79,7 +79,7 @@ const Section = styled.section`
 const Index = () => {
   
   useEffect(()=>{
-    setInterval(()=>{
+     setInterval(()=>{
       const palet_of_color = ['#3C3287','#EC1B32','#0293CF','#F04423','#006B5E','#FBE500','#FFF'];
       const random = Math.floor(Math.random()*palet_of_color.length)
       const main_title_name = document.querySelector("#main_title_name") as HTMLElement;
@@ -87,7 +87,6 @@ const Index = () => {
     },200)
 
   },[])
-
   return (
     <Section>
       <Outlet/>

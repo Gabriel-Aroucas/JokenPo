@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 
-const Div = styled.div`
+// eslint-disable-next-line react-refresh/only-export-components
+const Section = styled.section`
     width: 100vw;
     height: 100vh;
     background-color: #9CD6E4;
@@ -29,13 +30,12 @@ const Div = styled.div`
 `
 const Error_Page = () => {
   return (
-    <Div>
+    <Section>
         <h2>⍨</h2>
         <h1> Oh no !</h1>
         <p>Erro 404 - Página não encontrada</p>
         <Link to="/">Voltar</Link>
-        
-    </Div>
+    </Section>
   )
 }
 
