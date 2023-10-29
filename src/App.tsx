@@ -5,6 +5,7 @@ import HandScissors from "./assets/HandScissors.png";
 import Unknown from "./assets/unknown.png";
 import { useEffect, useState } from "react";
 import Modal from "./components/modal/Modal";
+import Loader from "./pages/Loader/Loader";
 const App = () => {
   const [choice, setchoice] = useState(Unknown);
   const [choiceP2, setchoiceP2] = useState(Unknown);
@@ -13,8 +14,8 @@ const App = () => {
   const [round, setround] = useState(0);
   const [winner, setwinner] = useState("");
   const [modalText, setmodalText] = useState("");
+  const [remove_Loader, set_Remove_Loader] = useState(false);
   const modal = document.querySelector(".Modal_bg") as HTMLElement;
-
   const menu_Of_Choice = [
     {
       id: "1",
@@ -60,13 +61,15 @@ const App = () => {
       .then((data) => {
         const randomize = Math.floor(Math.random() * data.length);
         setmodalText(data[randomize].text);
+        set_Remove_Loader(true)
+
       });
 
     setTimeout(() => {
       validate_Win_or_Loose();
     }, 1000);
-    
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [round]);
 
   const validate_Win_or_Loose = () => {
@@ -75,17 +78,36 @@ const App = () => {
     const loose_Text = "Você perdeu !";
 
     const validate_options = {
-      rock_win: choice == HandRock && choiceP2 == HandScissors ? case_Win(win_Text): "",
-      rock_drawn:choice == HandRock && choiceP2 == HandRock ? case_Drawn(drawn_Text): "",
-      rock_loose: choice == HandRock && choiceP2 == Hand ? case_Loose(loose_Text): "",
+      rock_win:
+        choice == HandRock && choiceP2 == HandScissors
+          ? case_Win(win_Text)
+          : "",
+      rock_drawn:
+        choice == HandRock && choiceP2 == HandRock
+          ? case_Drawn(drawn_Text)
+          : "",
+      rock_loose:
+        choice == HandRock && choiceP2 == Hand ? case_Loose(loose_Text) : "",
 
-      hand_win:choice == Hand && choiceP2 == HandRock ? case_Win(win_Text) : "",
-      hand_drawn:choice == Hand && choiceP2 == Hand ? case_Drawn(drawn_Text) : "",
-      hand_loose:choice == Hand && choiceP2 == HandScissors ? case_Loose(loose_Text): "",
+      hand_win:
+        choice == Hand && choiceP2 == HandRock ? case_Win(win_Text) : "",
+      hand_drawn:
+        choice == Hand && choiceP2 == Hand ? case_Drawn(drawn_Text) : "",
+      hand_loose:
+        choice == Hand && choiceP2 == HandScissors
+          ? case_Loose(loose_Text)
+          : "",
 
-      scissor_win:choice == HandScissors && choiceP2 == Hand ? case_Win(win_Text) : "",
-      scissor_drawn:choice == HandScissors && choiceP2 == HandScissors ? case_Drawn(drawn_Text) : "",
-      scissor_loose:choice == HandScissors && choiceP2 == HandRock ? case_Loose(loose_Text) : "",
+      scissor_win:
+        choice == HandScissors && choiceP2 == Hand ? case_Win(win_Text) : "",
+      scissor_drawn:
+        choice == HandScissors && choiceP2 == HandScissors
+          ? case_Drawn(drawn_Text)
+          : "",
+      scissor_loose:
+        choice == HandScissors && choiceP2 == HandRock
+          ? case_Loose(loose_Text)
+          : "",
     };
     validate_options;
   };
@@ -112,13 +134,13 @@ const App = () => {
     const result = images[random];
     setchoiceP2(result);
   };
-  const disable_Button_Play_Game =()=>{
-    const button_play_Game = document.querySelector("#button_Play_Game")
-    button_play_Game?.setAttribute("Disabled","")
-  }
+  const disable_Button_Play_Game = () => {
+    const button_play_Game = document.querySelector("#button_Play_Game");
+    button_play_Game?.setAttribute("Disabled", "");
+  };
   const button_play_Game = () => {
     if (choice != Unknown) {
-      disable_Button_Play_Game()
+      disable_Button_Play_Game();
       setround(round + 1);
       validate_Win_or_Loose();
       player_Two_animation_images();
@@ -156,6 +178,7 @@ const App = () => {
           Jogar
         </button>
       </section>
+      {!remove_Loader && <Loader />}
     </>
   );
 };
