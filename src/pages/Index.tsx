@@ -82,6 +82,11 @@ const Section = styled.section`
           p{
             text-transform: capitalize;
             color: #fff;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
           }
           span:nth-child(1){
             position:absolute;
@@ -193,9 +198,7 @@ const Index = () => {
       ) as HTMLElement;
       main_title_name!.style.color = palet_of_color[random];
 
-      const button_single_mode = document.querySelector(
-        "#button_single_mode"
-      ) as HTMLElement;
+      const button_single_mode = document.querySelector("#button_single_mode") as HTMLElement;
       button_single_mode.addEventListener("click", () => {
         clearInterval(colorize_title_span);
       });
@@ -220,7 +223,7 @@ const Index = () => {
       <div className="select_game_mode">
         <p>escolha uma opção</p>
         <article>
-          <Link to='single_mode'>
+          <Link to='single_mode' id="button_single_mode">
             <div className="single_player">
               <span></span>
               <span></span>

@@ -159,6 +159,7 @@ const App = () => {
       </header>
       <section className="modalOfPlayers">
         <div className="modalPlayerOne">
+          <span></span>
           <img src={choice} width={"250px"} alt="the choice player image" />
         </div>
         <div>
