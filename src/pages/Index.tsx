@@ -36,6 +36,7 @@ const Section = styled.section`
       background-color: black;
       transform: rotate(270deg);
     }
+
   }
 
   @keyframes loop {
@@ -70,10 +71,96 @@ const Section = styled.section`
       }
       a {
         width: 40%;
+        text-decoration: none;
+        .single_player{
+          position: relative;
+          width: 100%;
+          height: 50px;
+          background-color: #1c1c1c;
+          overflow: hidden;
+          margin: 5px 0;
+          p{
+            text-transform: capitalize;
+            color: #fff;
+          }
+          span:nth-child(1){
+            position:absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, red);
+            animation: border_loop_one 1s linear infinite;
+
+          }
+          span:nth-child(2){
+            position:absolute;
+            top: 0;
+            right: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, red);
+            animation: border_loop_two 1s linear infinite;
+            animation-delay: 500ms;
+
+          }
+          span:nth-child(3){
+            position:absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to left, transparent, red);
+            animation: border_loop_three 1s linear infinite;
+            animation-delay: 1s;
+
+          }
+          span:nth-child(4){
+            position:absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to top, transparent, red);
+            animation: border_loop_four 1s linear infinite;
+            animation-delay: 1.5s;
+
+          }
+        }
+        .more_buttons{
+          position: relative;
+          width: 100%;
+          height: 50px;
+          background-color: #1c1c1c;
+          overflow: hidden;
+          margin: 5px 0;
+          opacity: 0.3;
+
+          p{
+            text-transform: capitalize;
+            color: rgb(255, 255, 255);
+          }
+        }
       }
     }
   }
 
+  @keyframes border_loop_one {
+    0% {transform:translateX(-100%)}
+    100% {transform:translateX(100%)}
+  }
+  @keyframes border_loop_two {
+    0% {transform:translateY(-100%)}
+    100% {transform:translateY(100%)}
+  }
+  @keyframes border_loop_three {
+    0% {transform:translateX(100%)}
+    100% {transform:translateX(-100%)}
+  }
+  @keyframes border_loop_four {
+    0% {transform:translateY(100%)}
+    100% {transform:translateY(-100%)}
+  }
   @media only screen and (max-width: 500px) {
     .main_title {
       font-size: 10vw;
@@ -133,21 +220,34 @@ const Index = () => {
       <div className="select_game_mode">
         <p>escolha uma opção</p>
         <article>
-          <Link to="single_Mode">
-            <button type="button" id="button_single_mode">
-              Modo 1 Jogador
-            </button>
+          <Link to='single_mode'>
+            <div className="single_player">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <p>1 Jogador</p>
+            </div>
           </Link>
-          <Link to="single_Mode">
-            <button type="button" disabled>
-              Modo 2 Jogadores
-            </button>
+
+          <Link to='/'>
+            <div className="more_buttons">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <p>2 Jogadores</p>
+            </div>
           </Link>
-          <Link to="single_Mode">
-            <button type="button" disabled>
-              {" "}
-              Modo Online{" "}
-            </button>
+
+          <Link to='/'>
+            <div className="more_buttons">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <p>Online</p>
+            </div>
           </Link>
         </article>
       </div>
