@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import { styled } from "styled-components";
-import HandRock from "../assets/HandRock.png";
-import Hand from "../assets/Hand.png";
 import HandScissors from "../assets/HandScissors.png";
 import { Link } from "react-router-dom";
 
@@ -30,6 +28,7 @@ const Section = styled.section`
     img{
         border-radius: 50%;
         background-color: black;
+        transform:rotate(270deg)
       }
     }
 
@@ -87,14 +86,6 @@ const Index = () => {
       main_title_name!.style.color=palet_of_color[random]
     },200)
 
-    setInterval(()=>{
-      const images = [Hand,HandRock,HandScissors]
-      const random_images = Math.floor(Math.random()*images.length)
-      const main_image_src = document.querySelector("#main_image_src") as HTMLImageElement;
-      main_image_src!.src=images[random_images]; 
-
-    },1000)
-
   },[])
 
   return (
@@ -102,7 +93,7 @@ const Index = () => {
       <div className="main_title">
         <h1>bem vindo ao <span id="main_title_name">jokenPo</span></h1>
           <div className="img_border_effect"/>
-          <img src="https://placehold.co/250x250" width="250px" id="main_image_src" alt="alt lorem" />
+          <img src={HandScissors} width="250px" id="main_image_src" alt="alt lorem" />
       </div>
       <div className="select_game_mode">
         <p>escolha uma opção</p>
