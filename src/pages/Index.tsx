@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { styled } from "styled-components";
 import HandScissors from "../assets/HandScissors.png";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 
 const Section = styled.section`
@@ -90,6 +90,7 @@ const Index = () => {
 
   return (
     <Section>
+      <Outlet/>
       <div className="main_title">
         <h1>bem vindo ao <span id="main_title_name">jokenPo</span></h1>
           <div className="img_border_effect"/>

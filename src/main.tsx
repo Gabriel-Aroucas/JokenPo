@@ -10,12 +10,18 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Index />,
+    children:[
+      {
+        path:"/",
+        element:<Index/>,
+      },
+      {
+        path:"single_Mode",
+        element:<App/>
+      }
+    ]
   },
-  {
-    path:"single_Mode",
-    element:<App/>
-  }
+  
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
