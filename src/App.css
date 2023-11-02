@@ -3,9 +3,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-audio{
-  display: block;
-}
 body{
   background-color: black;
   color: #fff;
@@ -14,6 +11,25 @@ header{
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+.goto_index{
+  position: relative;
+}
+.house_goto_index{
+  position: absolute;
+  border: 1px dotted rgba(255, 255, 255, 0.5);
+  width: 5%;
+  text-align: center;
+  right: 0;
+  border-radius: 0 0 4px 4px;
+  cursor: pointer;
+
+}
+.house_goto_index a{
+  color: unset;
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 header span{
   padding: 1rem;
@@ -33,7 +49,6 @@ header span:nth-child(2){
   align-items: center;
   height: 40px;
 }
-
 .modalOfPlayers{
   display: flex;
   justify-content: center;
@@ -105,6 +120,7 @@ header span:nth-child(2){
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.9);
   display: none;
+  z-index: 10;
   
 }
 .Modal{
@@ -118,6 +134,7 @@ header span:nth-child(2){
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: rgba(207, 204, 204, 0.4);
   border-radius: 2px;
+  z-index: 10;
 }
 .Modal h1{
   font-size: 3rem;

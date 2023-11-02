@@ -9,7 +9,7 @@ const Modal = (props:Model) => {
     modal.style.display='none'
     
   }
-  const hability_Button_Play_Game=()=>{
+  const desability_Button_Play_Game=()=>{
     const button_play_Game = document.querySelector("#button_Play_Game")
     button_play_Game?.removeAttribute("Disabled")
   }
@@ -19,7 +19,7 @@ const Modal = (props:Model) => {
       <div className="Modal">
         <h1>{props.title}</h1>
         <p>{props.text}</p>
-        <button type="button" onClick={()=> { handle_submit(); hability_Button_Play_Game() }}>ok</button>
+        <button type="button" onClick={()=> { handle_submit(); desability_Button_Play_Game() }}>ok</button>
       </div>
     </section>
   );

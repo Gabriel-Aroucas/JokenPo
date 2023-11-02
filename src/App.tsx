@@ -6,6 +6,7 @@ import Unknown from "./assets/unknown.png";
 import { useEffect, useState } from "react";
 import Modal from "./components/modal/Modal";
 import Loader from "./pages/Loader/Loader";
+import { Link } from "react-router-dom";
 const App = () => {
   const [choice, setchoice] = useState(Unknown);
   const [choiceP2, setchoiceP2] = useState(Unknown);
@@ -149,6 +150,7 @@ const App = () => {
     }
   };
 
+
   return (
     <>
       <Modal title={winner} text={modalText} />
@@ -157,6 +159,11 @@ const App = () => {
         <span>x</span>
         <span>{pointsP2}</span>
       </header>
+      <section className="goto_index">
+        <div className="house_goto_index">
+          <Link to={'/'}>Início</Link>
+        </div>
+      </section>
       <section className="modalOfPlayers">
         <div className="modalPlayerOne">
           <span></span>
@@ -179,7 +186,7 @@ const App = () => {
           Jogar
         </button>
       </section>
-      {!remove_Loader && <Loader />}
+      {remove_Loader && <Loader />}
     </>
   );
 };
