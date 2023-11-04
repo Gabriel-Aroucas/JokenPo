@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { styled } from "styled-components";
-import HandScissors from "../assets/HandScissors.png";
+import HandScissors from "../assets/scissors.png";
 import { Link, Outlet } from "react-router-dom";
 
 const Section = styled.section`
@@ -25,16 +25,13 @@ const Section = styled.section`
       margin-left: -130px;
       margin-top: -5px;
       z-index: -1;
-      background: -webkit-linear-gradient(45deg, red, yellow);
+      //background: -webkit-linear-gradient(45deg, red, yellow);
       width: 260px;
       height: 260px;
-      border-radius: 50%;
-      animation: loop 1s infinite;
+      //animation: loop 1s infinite;
     }
     img {
-      border-radius: 50%;
-      background-color: black;
-      transform: rotate(270deg);
+//      transform: rotate(270deg);
     }
 
   }
@@ -76,7 +73,7 @@ const Section = styled.section`
           position: relative;
           width: 100%;
           height: 50px;
-          background-color: #1c1c1c;
+          background-color: #2e1237;
           overflow: hidden;
           margin: 5px 0;
           p{
@@ -94,7 +91,7 @@ const Section = styled.section`
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(to right, transparent, red);
+            background: linear-gradient(to right, transparent, #ff00bb);
             animation: border_loop_one 1s linear infinite;
 
           }
@@ -104,7 +101,7 @@ const Section = styled.section`
             right: 0;
             width: 3px;
             height: 100%;
-            background: linear-gradient(to bottom, transparent, red);
+            background: linear-gradient(to bottom, transparent, #ff00bb);
             animation: border_loop_two 1s linear infinite;
             animation-delay: 500ms;
 
@@ -115,7 +112,7 @@ const Section = styled.section`
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(to left, transparent, red);
+            background: linear-gradient(to left, transparent, #ff00bb);
             animation: border_loop_three 1s linear infinite;
             animation-delay: 1s;
 
@@ -126,10 +123,9 @@ const Section = styled.section`
             left: 0;
             width: 3px;
             height: 100%;
-            background: linear-gradient(to top, transparent, red);
+            background: linear-gradient(to top, transparent, #ff00bb);
             animation: border_loop_four 1s linear infinite;
             animation-delay: 1.5s;
-
           }
         }
         .more_buttons{
@@ -215,7 +211,7 @@ const Index = () => {
         <div className="img_border_effect" />
         <img
           src={HandScissors}
-          width="250px"
+          width="150px"
           id="main_image_src"
           alt="alt lorem"
         />
