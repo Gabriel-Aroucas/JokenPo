@@ -24,7 +24,7 @@ const Section = styled.section`
     border-radius: 50%;
     transition: 1s;
     border-top: 10px solid #f04423;
-    animation: loading 1s infinite;
+    animation: loading 1s linear infinite;
   }
 
   @keyframes loading {

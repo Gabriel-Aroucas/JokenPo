@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         element:<Index/>,
       },
       {
-        path:"single_Mode",
+        path:"single_mode",
         element:<App/>
       }
     ]

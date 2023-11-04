@@ -3,9 +3,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-audio{
-  display: block;
-}
 body{
   background-color: black;
   color: #fff;
@@ -15,12 +12,32 @@ header{
   justify-content: space-around;
   align-items: center;
 }
+.goto_index{
+  position: relative;
+}
+.house_goto_index{
+  position: absolute;
+  border: 1px dotted rgba(255, 255, 255, 0.5);
+  width: 5%;
+  text-align: center;
+  right: 0;
+  border-radius: 0 0 4px 4px;
+  cursor: pointer;
+
+}
+.house_goto_index a{
+  color: unset;
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 header span{
   padding: 1rem;
   background-color: #fff;
   color: #000;
   width: 50%;
   border-radius: 5px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 header span:nth-child(1){
   text-align: end;
@@ -33,7 +50,6 @@ header span:nth-child(2){
   align-items: center;
   height: 40px;
 }
-
 .modalOfPlayers{
   display: flex;
   justify-content: center;
@@ -41,14 +57,31 @@ header span:nth-child(2){
   margin: 1rem 0;
 }
 .modalPlayerOne,.modalPlayerTwo{
+  position: relative;
   margin: 0 10px;
   background-color: #0c0c0c;
   border-radius: 50%;
-  padding: 1rem;
 }
 .modalPlayerOne img, .modalPlayerTwo img{
+  position: relative;
   border-radius: 50%;
-  max-width: 150px;
+  max-width: 250px;
+  padding: 2rem;
+}
+.modalPlayerOne span{
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  border-top: 8px solid #f0de36;
+  animation:modal_player_one_loop 1s linear infinite;
+}
+@keyframes modal_player_one_loop {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+  
 }
 .menu_Of_Choice{
   background-color: #0c0c0c;
@@ -79,6 +112,8 @@ header span:nth-child(2){
 .button_Play_Game button{
   padding: 1rem 3rem;
   cursor: pointer;
+  border-radius: 3px;
+  border: none;
 }
 .Modal_bg{
   position: absolute;
@@ -86,6 +121,7 @@ header span:nth-child(2){
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.9);
   display: none;
+  z-index: 10;
   
 }
 .Modal{
@@ -99,6 +135,7 @@ header span:nth-child(2){
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: rgba(207, 204, 204, 0.4);
   border-radius: 2px;
+  z-index: 10;
 }
 .Modal h1{
   font-size: 3rem;
