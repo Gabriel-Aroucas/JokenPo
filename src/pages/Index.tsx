@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
 import { styled } from "styled-components";
 import main from "../assets/main.png";
 import { Link, Outlet } from "react-router-dom";
+import Loader from "./Loader/Loader";
+
 
 const Section = styled.section`
   .main_title {
@@ -178,6 +180,8 @@ const Section = styled.section`
 `;
 
 const Index = () => {
+  const [remove_Loader, set_remove_Loader] = useState(false);
+  
   useEffect(() => {
     const colorize_title_span = setInterval(() => {
       const palet_of_color = [
@@ -199,6 +203,8 @@ const Index = () => {
         clearInterval(colorize_title_span);
       });
     }, 500);
+
+    set_remove_Loader(true)
   }, []);
 
   return (
@@ -250,6 +256,7 @@ const Index = () => {
           </Link>
         </article>
       </div>
+      {!remove_Loader && <Loader/>}
     </Section>
   );
 };
