@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { styled } from "styled-components";
-import HandScissors from "../assets/scissors.png";
+import main from "../assets/main.png";
 import { Link, Outlet } from "react-router-dom";
 
 const Section = styled.section`
@@ -32,6 +32,7 @@ const Section = styled.section`
     }
     img {
 //      transform: rotate(270deg);
+      border-radius: 50%;
     }
 
   }
@@ -189,9 +190,8 @@ const Index = () => {
         "#FFF",
       ];
       const random = Math.floor(Math.random() * palet_of_color.length);
-      const main_title_name = document.querySelector(
-        "#main_title_name"
-      ) as HTMLElement;
+      const main_title_name = document.querySelector("#main_title_name") as HTMLElement;
+     
       main_title_name!.style.color = palet_of_color[random];
 
       const button_single_mode = document.querySelector("#button_single_mode") as HTMLElement;
@@ -210,8 +210,8 @@ const Index = () => {
         </h1>
         <div className="img_border_effect" />
         <img
-          src={HandScissors}
-          width="150px"
+          src={main}
+          width="250px"
           id="main_image_src"
           alt="alt lorem"
         />

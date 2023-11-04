@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import Modal from "./components/modal/Modal";
 import Loader from "./pages/Loader/Loader";
 import { Link } from "react-router-dom";
+import house from "./assets/house.png"
+
 const App = () => {
 	const [choice, setchoice] = useState(Unknown);
 	const [choiceP2, setchoiceP2] = useState(Unknown);
@@ -60,6 +62,7 @@ const App = () => {
 				const randomize = Math.floor(Math.random() * data.length);
 				setmodalText(data[randomize].text);
 				set_Remove_Loader(true);
+
 			});
 
 		setTimeout(() => {
@@ -195,7 +198,6 @@ const App = () => {
 			setround(round + 1);
 			validate_Win_or_Loose();
 			player_Two_animation_images();
-			colorize_border_button_play_game()
 		} else {
 			alert("Error" + "\n" + "você precisa selecionar ao menos uma opção");
 		}
@@ -211,7 +213,9 @@ const App = () => {
 			</header>
 			<section className="goto_index">
 				<div className="house_goto_index">
-					<Link to={"/"}>Início</Link>
+					<Link to={"/"}>
+						<img src={house} alt="" width='30px' />
+					</Link>
 				</div>
 			</section>
 			<section className="modalOfPlayers">

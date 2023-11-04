@@ -18,13 +18,10 @@ header{
   justify-content: space-around;
   align-items: center;
 }
-.goto_index{
-  position: relative;
-}
 .house_goto_index{
   position: absolute;
   border: 1px dotted rgba(255, 255, 255, 0.5);
-  width: 5%;
+  filter: invert(90%);
   text-align: center;
   right: 0;
   border-radius: 0 0 4px 4px;
@@ -36,6 +33,15 @@ header{
   text-decoration: none;
   font-size: 1rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+@media only screen and (max-width: 500px){
+  .house_goto_index{
+    bottom: 1rem;
+    margin: 0 10px;
+    border:3px dashed black;
+    border-radius: 50%;
+    padding: 5px;
+  }
 }
 header span{
   padding: 0 1rem;
