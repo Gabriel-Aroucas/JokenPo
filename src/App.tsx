@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import Modal from "./components/modal/Modal";
 import Loader from "./pages/Loader/Loader";
 import { Link } from "react-router-dom";
+import house from "./assets/house.png"
+
 const App = () => {
 	const [choice, setchoice] = useState(Unknown);
 	const [choiceP2, setchoiceP2] = useState(Unknown);
@@ -60,6 +62,7 @@ const App = () => {
 				const randomize = Math.floor(Math.random() * data.length);
 				setmodalText(data[randomize].text);
 				set_Remove_Loader(true);
+
 			});
 
 		setTimeout(() => {
@@ -167,35 +170,13 @@ const App = () => {
 		const button_play_Game = document.querySelector("#button_Play_Game");
 		button_play_Game?.setAttribute("Disabled", "");
 	};
-	const colorize_border_button_play_game=()=>{
-		const border_corlor = setInterval(()=>{
-			const button_Play_Game = document.querySelector("#button_Play_Game") as HTMLButtonElement;
-			const palet_of_color = [
-				"#3C3287",
-				"#EC1B32",
-				"#0293CF",
-				"#F04423",
-				"#006B5E",
-				"#FBE500",
-				"#FFF",];
-			const randomize = Math.floor(Math.random()*palet_of_color.length)
-			button_Play_Game.style.border=`2px dotted ${palet_of_color[randomize]}`
-		},200)
 
-		const button_submit_modal = document.querySelector("#button_submit_modal") as HTMLButtonElement;
-		button_submit_modal.addEventListener('click',()=>{
-			clearInterval(border_corlor)
-		})
-
-
-	}
 	const button_play_Game = () => {
 		if (choice != Unknown) {
 			disable_Button_Play_Game();
 			setround(round + 1);
 			validate_Win_or_Loose();
 			player_Two_animation_images();
-			colorize_border_button_play_game()
 		} else {
 			alert("Error" + "\n" + "você precisa selecionar ao menos uma opção");
 		}
@@ -211,7 +192,9 @@ const App = () => {
 			</header>
 			<section className="goto_index">
 				<div className="house_goto_index">
-					<Link to={"/"}>Início</Link>
+					<Link to={"/"}>
+						<img src={house} alt="" width='30px' />
+					</Link>
 				</div>
 			</section>
 			<section className="modalOfPlayers">
