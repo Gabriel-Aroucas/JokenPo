@@ -207,7 +207,9 @@ const App = () => {
 			validate_Win_or_Loose();
 			player_Two_animation_images();
 		} else {
-			alert("Error" + "\n" + "você precisa selecionar ao menos uma opção");
+			handle_modal('block');
+			setwinner("Ops!")
+			setmodalText("Você precisa selecionar pelo menos uma opção")
 		}
 	};
 
