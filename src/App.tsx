@@ -6,10 +6,10 @@ import Unknown from "./assets/unknown.png";
 import { useEffect, useState } from "react";
 import Modal from "./components/modal/Modal";
 import Loader from "./pages/Loader/Loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import house from "./assets/house.png"
-
 const App = () => {
+	const navigate = useNavigate();
 	const [choice, setchoice] = useState(Unknown);
 	const [choiceP2, setchoiceP2] = useState(Unknown);
 	const [pointsP1, setpointsP1] = useState(0);
@@ -87,8 +87,8 @@ const App = () => {
 		setpointsP1(0);
 		setpointsP2(0);
 		setTimeout(() => {
-			window.location.reload()
-		}, 200);
+			navigate("/")
+		}, 1000);
 	};
 
 	const verify_end_game = () => {

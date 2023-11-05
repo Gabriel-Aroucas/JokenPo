@@ -19,6 +19,8 @@ const router = createBrowserRouter([
     children:[
       {
         path:"/",
+        errorElement:<Error_Page/>,
+
         element:
         <Suspense fallback={<Loader/>} >
           <Lazy_index/>
@@ -26,6 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path:"single_mode",
+        errorElement:<Error_Page/>,
         element:
         <Suspense fallback={<Loader/>} >
           <Lazy_App/>
