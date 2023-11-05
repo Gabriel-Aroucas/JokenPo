@@ -93,8 +93,11 @@ const App = () => {
 		modal.style.display=none_or_block
 	}
 	const verify_end_game = () => {
+		const html_pointsP1 = document.querySelector("#html_pointsP1") as HTMLSpanElement;
+		const html_pointsP2 = document.querySelector("#html_pointsP2") as HTMLSpanElement;
 
-		if (pointsP1 == 4 && pointsP2 == 4) {
+
+		if (html_pointsP1.innerHTML == '5' && html_pointsP2.innerHTML == '5') {
 			handle_modal('none')
 			disable_Button_Play_Game()
 			setTimeout(() => {
@@ -106,7 +109,7 @@ const App = () => {
 					reset_game();
 				}, 5000);
 			}, 1000);
-		}else if(pointsP1 == 4){
+		}else if(html_pointsP1.innerHTML == '5'){
 			handle_modal('none')
 			disable_Button_Play_Game()
 
@@ -120,7 +123,7 @@ const App = () => {
 				}, 5000);
 
 			}, 1000);
-		}else if(pointsP2 ==4){
+		}else if(html_pointsP2.innerHTML == '5'){
 			handle_modal('none')
 			disable_Button_Play_Game()
 			set_modal_button_display("none")
@@ -142,33 +145,33 @@ const App = () => {
 
 		const validate_options = {
 			rock_win:
-				choice == HandRock && choiceP2 == HandScissors
+				choice === HandRock && choiceP2 === HandScissors
 					? case_Win(win_Text)
 					: "",
 			rock_drawn:
-				choice == HandRock && choiceP2 == HandRock
+				choice === HandRock && choiceP2 === HandRock
 					? case_Drawn(drawn_Text)
 					: "",
 			rock_loose:
-				choice == HandRock && choiceP2 == Hand ? case_Loose(loose_Text) : "",
+				choice === HandRock && choiceP2 === Hand ? case_Loose(loose_Text) : "",
 
 			hand_win:
-				choice == Hand && choiceP2 == HandRock ? case_Win(win_Text) : "",
+				choice === Hand && choiceP2 === HandRock ? case_Win(win_Text) : "",
 			hand_drawn:
-				choice == Hand && choiceP2 == Hand ? case_Drawn(drawn_Text) : "",
+				choice === Hand && choiceP2 === Hand ? case_Drawn(drawn_Text) : "",
 			hand_loose:
-				choice == Hand && choiceP2 == HandScissors
+				choice === Hand && choiceP2 === HandScissors
 					? case_Loose(loose_Text)
 					: "",
 
 			scissor_win:
-				choice == HandScissors && choiceP2 == Hand ? case_Win(win_Text) : "",
+				choice === HandScissors && choiceP2 === Hand ? case_Win(win_Text) : "",
 			scissor_drawn:
-				choice == HandScissors && choiceP2 == HandScissors
+				choice === HandScissors && choiceP2 === HandScissors
 					? case_Drawn(drawn_Text)
 					: "",
 			scissor_loose:
-				choice == HandScissors && choiceP2 == HandRock
+				choice === HandScissors && choiceP2 === HandRock
 					? case_Loose(loose_Text)
 					: "",
 		};
@@ -180,6 +183,8 @@ const App = () => {
 		handle_modal('block')
 	};
 	const case_Drawn = (winnerName: string) => {
+		setpointsP2(pointsP1 + 0);
+		setpointsP2(pointsP2 + 0);
 		setwinner(winnerName);
 		handle_modal('block')
 	};
@@ -201,6 +206,7 @@ const App = () => {
 	};
 
 	const button_play_Game = () => {
+	
 		if (choice != Unknown) {
 			disable_Button_Play_Game();
 			setround(round + 1);
@@ -217,9 +223,9 @@ const App = () => {
 		<>
 			<Modal title={winner} text={modalText} display={modal_button_display} />
 			<header className="score">
-				<span>{pointsP1}</span>
+				<span id="html_pointsP1">{pointsP1}</span>
 				<span>x</span>
-				<span>{pointsP2}</span>
+				<span id="html_pointsP2">{pointsP2}</span>
 			</header>
 			<section className="goto_index">
 				<div className="house_goto_index">
