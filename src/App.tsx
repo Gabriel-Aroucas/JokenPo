@@ -18,7 +18,7 @@ const App = () => {
 	const [winner, setwinner] = useState("");
 	const [modalText, setmodalText] = useState("");
 	const [remove_Loader, set_Remove_Loader] = useState(false);
-	const modal = document.querySelector(".Modal_bg") as HTMLElement;
+	const [modal_button_display, set_modal_button_display] = useState("");
 	const menu_Of_Choice = [
 		{
 			id: "1",
@@ -54,7 +54,7 @@ const App = () => {
 			<img src={e.image} title={e.title} alt={e.alt} onClick={e.click} />
 		</li>
 	));
-
+	
 	useEffect(() => {
 		fetch("https://json-server-tim1.vercel.app/frases")
 			.then((response) => response.json())
@@ -62,20 +62,18 @@ const App = () => {
 				const randomize = Math.floor(Math.random() * data.length);
 				setmodalText(data[randomize].text);
 				set_Remove_Loader(true);
-
 			});
 
 		setTimeout(() => {
 			validate_Win_or_Loose();
 		}, 1000);
 
-		const button_submit_modal = document.querySelector(
-			"#button_submit_modal"
-		) as HTMLElement;
+		const button_submit_modal = document.querySelector("#button_submit_modal") as HTMLElement;
+		set_modal_button_display("block")
 		button_submit_modal.addEventListener("click", () => {
-			verify_end_game();
 			setchoice(Unknown);
 			setchoiceP2(Unknown);
+			verify_end_game()
 		});
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -90,20 +88,52 @@ const App = () => {
 			navigate("/")
 		}, 1000);
 	};
-
+	const handle_modal=(none_or_block:string)=>{
+		const modal = document.querySelector(".Modal_bg") as HTMLElement;
+		modal.style.display=none_or_block
+	}
 	const verify_end_game = () => {
-		if (pointsP1 == 4 && pointsP1 > pointsP2) {
-			reset_game();
-			alert("win")
-		} else if (pointsP1 == 4 && pointsP1 == pointsP2) {
-			reset_game();
-			alert("drawn")
-		} else if (pointsP2 == 4 && pointsP1 < pointsP2) {
-			alert("loose")
-			reset_game();
-		} else {
-			modal.style.display = "none";
-		}
+
+		if (pointsP1 == 4 && pointsP2 == 4) {
+			handle_modal('none')
+			disable_Button_Play_Game()
+			setTimeout(() => {
+				handle_modal('block');
+				set_modal_button_display("none")
+				setwinner("Você Empatou no JokenPô")
+				setmodalText("Em instantes, você será redirecionado para a página principal, obrigado por testar o game")
+				setTimeout(() => {
+					reset_game();
+				}, 5000);
+			}, 1000);
+		}else if(pointsP1 == 4){
+			handle_modal('none')
+			disable_Button_Play_Game()
+
+			set_modal_button_display("none")
+			setTimeout(() => {
+				handle_modal('block')
+				setwinner("Você Venceu no JokenPô")
+				setmodalText("Em instantes, você será redirecionado para a página principal, obrigado por testar o game")
+				setTimeout(() => {
+					reset_game();
+				}, 5000);
+
+			}, 1000);
+		}else if(pointsP2 ==4){
+			handle_modal('none')
+			disable_Button_Play_Game()
+			set_modal_button_display("none")
+			setTimeout(() => {
+				handle_modal('block')
+				setwinner("Você Perdeu no JokenPô")
+				setmodalText("Em instantes, você será redirecionado para a página principal,obrigado por testar o gamel")
+				setTimeout(() => {
+					reset_game();
+				}, 5000);
+
+			}, 1000);
+		} 
 	};
 	const validate_Win_or_Loose = () => {
 		const win_Text = "Você venceu !";
@@ -147,18 +177,17 @@ const App = () => {
 	const case_Win = (winnerName: string) => {
 		setpointsP1(pointsP1 + 1);
 		setwinner(winnerName);
-		modal.style.display = "block";
+		handle_modal('block')
 	};
 	const case_Drawn = (winnerName: string) => {
-		setpointsP1(pointsP1 + 1);
-		setpointsP2(pointsP2 + 1);
 		setwinner(winnerName);
-		modal.style.display = "block";
+		handle_modal('block')
 	};
 	const case_Loose = (winnerName: string) => {
 		setpointsP2(pointsP2 + 1);
 		setwinner(winnerName);
-		modal.style.display = "block";
+		handle_modal('block')
+
 	};
 	const player_Two_animation_images = () => {
 		const images = [HandRock, Hand, HandScissors];
@@ -184,7 +213,7 @@ const App = () => {
 
 	return (
 		<>
-			<Modal title={winner} text={modalText} />
+			<Modal title={winner} text={modalText} display={modal_button_display} />
 			<header className="score">
 				<span>{pointsP1}</span>
 				<span>x</span>

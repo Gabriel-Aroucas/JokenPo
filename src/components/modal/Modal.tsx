@@ -1,8 +1,16 @@
 interface Model {
     title:string,
     text:string,
+    display:string,
 }
 const Modal = (props:Model) => {
+
+
+  const button_submit_modal = document.querySelector("#button_submit_modal") as HTMLButtonElement;
+
+  if(button_submit_modal){
+  button_submit_modal.style.display=props.display;
+  }
 
   const handle_submit=()=>{
     const modal = document.querySelector(".Modal_bg") as HTMLElement;
