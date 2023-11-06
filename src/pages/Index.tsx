@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import main from "../assets/main.png";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Loader from "./Loader/Loader";
 
 const Section = styled.section`
   .main_title {
@@ -67,10 +68,15 @@ const Section = styled.section`
           Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
           sans-serif;
       }
-      a {
+      a{
+        color:unset;
+        text-decoration: none;
+      }
+      a:focus, a:hover {
+        outline: none;
         width: 40%;
         text-decoration: none;
-        .single_player{
+        .single_player,.more_buttons{
           position: relative;
           width: 100%;
           height: 50px;
@@ -146,6 +152,7 @@ const Section = styled.section`
       }
     }
   }
+  
 
   @keyframes border_loop_one {
     0% {transform:translateX(-100%)}
@@ -169,7 +176,7 @@ const Section = styled.section`
     }
     .select_game_mode {
       article {
-        a {
+        a, a:focus {
           width: 90%;
         }
       }
@@ -178,6 +185,12 @@ const Section = styled.section`
 `;
 
 const Index = () => {
+  const [remove_loader,set_remove_loader] = useState(false)
+  
+  const focus_on_first_option=()=>{
+    const button_to_focus = document.getElementById("button_single_mode") as HTMLAnchorElement;
+    button_to_focus.focus()
+  }
   useEffect(() => {
     const colorize_title_span = setInterval(() => {
       const palet_of_color = [
@@ -199,11 +212,14 @@ const Index = () => {
         clearInterval(colorize_title_span);
       });
     }, 500);
+    setTimeout(() => {
+      set_remove_loader(true)
+      focus_on_first_option()
+    }, 1000);
   }, []);
 
   return (
     <Section>
-      <Outlet />
       <div className="main_title">
         <h1>
           bem vindo ao <span id="main_title_name">jokenPo</span>
@@ -219,7 +235,7 @@ const Index = () => {
       <div className="select_game_mode">
         <p>escolha uma opção</p>
         <article>
-          <Link to='single_mode' id="button_single_mode">
+          <Link to='/single_mode'  id="button_single_mode">
             <div className="single_player">
               <span></span>
               <span></span>
@@ -250,6 +266,7 @@ const Index = () => {
           </Link>
         </article>
       </div>
+      {!remove_loader && <Loader/>}
     </Section>
   );
 };
