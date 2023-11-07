@@ -72,7 +72,7 @@ const Section = styled.section`
         outline: none;
         width: 40%;
         text-decoration: none;
-        .single_player{
+        .button_animation{
           position: relative;
           width: 100%;
           height: 50px;
@@ -232,7 +232,7 @@ const Index = () => {
         <p>escolha uma opção</p>
         <article>
           <Link to='/single_mode'  id="button_single_mode">
-            <div className="single_player">
+            <div className="button_animation">
               <span></span>
               <span></span>
               <span></span>
@@ -241,8 +241,8 @@ const Index = () => {
             </div>
           </Link>
 
-          <Link to='/'>
-            <div className="more_buttons">
+          <Link to='/two_players'>
+            <div className="button_animation">
               <span></span>
               <span></span>
               <span></span>
