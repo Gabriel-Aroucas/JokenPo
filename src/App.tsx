@@ -15,8 +15,8 @@ const App = () => {
 	const [pointsP1, setpointsP1] = useState(0);
 	const [pointsP2, setpointsP2] = useState(0);
 	const [round, setround] = useState(0);
-	const [winner, setwinner] = useState("");
-	const [modalText, setmodalText] = useState("");
+	const [modal_title, set_modal_title] = useState("");
+	const [modal_text, set_modal_text] = useState("");
 	const [remove_Loader, set_Remove_Loader] = useState(false);
 	const [modal_button_display, set_modal_button_display] = useState("");
 	const menu_Of_Choice = [
@@ -60,7 +60,7 @@ const App = () => {
 			.then((response) => response.json())
 			.then((data) => {
 				const randomize = Math.floor(Math.random() * data.length);
-				setmodalText(data[randomize].text);
+				set_modal_text(data[randomize].text);
 				set_Remove_Loader(true);
 			});
 
@@ -103,8 +103,8 @@ const App = () => {
 			setTimeout(() => {
 				handle_modal('block');
 				set_modal_button_display("none")
-				setwinner("Você Empatou no JokenPô")
-				setmodalText("Em instantes, você será redirecionado para a página principal, obrigado por testar o game")
+				set_modal_title("Você Empatou no JokenPô")
+				set_modal_text("Em instantes, você será redirecionado para a página principal, obrigado por testar o game")
 				setTimeout(() => {
 					reset_game();
 				}, 5000);
@@ -116,8 +116,8 @@ const App = () => {
 			set_modal_button_display("none")
 			setTimeout(() => {
 				handle_modal('block')
-				setwinner("Você Venceu no JokenPô")
-				setmodalText("Em instantes, você será redirecionado para a página principal, obrigado por testar o game")
+				set_modal_title("Você Venceu no JokenPô")
+				set_modal_text("Em instantes, você será redirecionado para a página principal, obrigado por testar o game")
 				setTimeout(() => {
 					reset_game();
 				}, 5000);
@@ -129,8 +129,8 @@ const App = () => {
 			set_modal_button_display("none")
 			setTimeout(() => {
 				handle_modal('block')
-				setwinner("Você Perdeu no JokenPô")
-				setmodalText("Em instantes, você será redirecionado para a página principal,obrigado por testar o gamel")
+				set_modal_title("Você Perdeu no JokenPô")
+				set_modal_text("Em instantes, você será redirecionado para a página principal,obrigado por testar o gamel")
 				setTimeout(() => {
 					reset_game();
 				}, 5000);
@@ -179,18 +179,18 @@ const App = () => {
 	};
 	const case_Win = (winnerName: string) => {
 		setpointsP1(pointsP1 + 1);
-		setwinner(winnerName);
+		set_modal_title(winnerName);
 		handle_modal('block')
 	};
 	const case_Drawn = (winnerName: string) => {
 		setpointsP2(pointsP1 + 0);
 		setpointsP2(pointsP2 + 0);
-		setwinner(winnerName);
+		set_modal_title(winnerName);
 		handle_modal('block')
 	};
 	const case_Loose = (winnerName: string) => {
 		setpointsP2(pointsP2 + 1);
-		setwinner(winnerName);
+		set_modal_title(winnerName);
 		handle_modal('block')
 
 	};
@@ -214,14 +214,14 @@ const App = () => {
 			player_Two_animation_images();
 		} else {
 			handle_modal('block');
-			setwinner("Ops!")
-			setmodalText("Você precisa selecionar pelo menos uma opção")
+			set_modal_title("Ops!")
+			set_modal_text("Você precisa selecionar pelo menos uma opção")
 		}
 	};
 
 	return (
 		<>
-			<Modal title={winner} text={modalText} display={modal_button_display} />
+			<Modal title={modal_title} text={modal_text} display={modal_button_display} />
 			<header className="score">
 				<span id="html_pointsP1">{pointsP1}</span>
 				<span>x</span>

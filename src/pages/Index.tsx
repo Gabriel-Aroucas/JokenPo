@@ -68,15 +68,11 @@ const Section = styled.section`
           Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
           sans-serif;
       }
-      a{
-        color:unset;
-        text-decoration: none;
-      }
-      a:focus, a:hover {
+      a {
         outline: none;
         width: 40%;
         text-decoration: none;
-        .single_player,.more_buttons{
+        .single_player{
           position: relative;
           width: 100%;
           height: 50px;
@@ -142,7 +138,7 @@ const Section = styled.section`
           background-color: #1c1c1c;
           overflow: hidden;
           margin: 5px 0;
-          opacity: 0.3;
+          opacity: 0.4;
 
           p{
             text-transform: capitalize;
@@ -222,7 +218,7 @@ const Index = () => {
     <Section>
       <div className="main_title">
         <h1>
-          bem vindo ao <span id="main_title_name">jokenPo</span>
+          <span id="main_title_name">jokenPo</span>
         </h1>
         <div className="img_border_effect" />
         <img
