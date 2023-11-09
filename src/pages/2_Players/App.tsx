@@ -17,7 +17,7 @@ const App = () => {
 	const [pointsP2, setpointsP2] = useState(0);
 	const [turn_p1,set_turn_p1]= useState("");
 	const [turn_p2,set_turn_p2]= useState("");
-	const [round, setround] = useState(0);
+	//const [round, setround] = useState(0);
 	const [modal_title, set_modal_title] = useState("");
 	const [modal_text, set_modal_text] = useState("");
 	const [remove_Loader, set_Remove_Loader] = useState(false);
@@ -85,6 +85,7 @@ const App = () => {
 	));
 
 	useEffect(() => {
+		verify_close_modal_to_check_turn()
 		setTimeout(() => {
 			change_turn_to_player_one()
 		}, 1000);
@@ -104,7 +105,7 @@ const App = () => {
 				set_Remove_Loader(true);
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [round]);
+	}, [turn]);
 
 	const reset_game = () => {
 		setchoice(Unknown);
@@ -166,9 +167,9 @@ const App = () => {
 		}
 	};
 	const validate_Win_or_Loose = () => {
-		const win_Text = "Você venceu !";
+		const win_Text = "Player 1 Venceu !";
 		const drawn_Text = "Empate !";
-		const loose_Text = "Você perdeu !";
+		const loose_Text = "Player 2 Venceu !";
 
 		const validate_options = {
 			rock_win:
@@ -265,6 +266,8 @@ const App = () => {
 		show_on_display_the_choose()
 		handle_menu_of_choice('block')
 		change_name_button_play_game("Escolher")
+		verify_close_modal_to_check_turn()
+
 	}
 	const button_play_Game = () => {
 		if (choice != Unknown) {
@@ -287,20 +290,19 @@ const App = () => {
 			set_modal_text("Você precisa selecionar pelo menos uma opção")
 		}
 
-		verify_close_modal_to_check_turn()
 
 	};
 
 	const verify_close_modal_to_check_turn = () => {
 		const modal = document.querySelector(".Modal_bg") as HTMLElement;
-		modal.addEventListener("click", () => {
-			if (turn % 2 != 0) {
-				set_modal_title("Jogador 2 !")
-				set_modal_text("lorem impsum")
-				handle_modal("block");
-
-			}
+		modal.addEventListener("click",()=>{
+			if(turn == 2){
+				setchoice(Unknown)
+				setchoiceP2(Unknown)
+				set_turn(0)			
+		}
 		})
+			
 
 	}
 	return (
