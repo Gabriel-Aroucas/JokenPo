@@ -15,6 +15,7 @@ const Modal = (props:Model) => {
   const handle_submit=()=>{
     const modal = document.querySelector(".Modal_bg") as HTMLElement;
     modal.style.display='none'    
+    
 
   }
   const hability_Button_Play_Game=()=>{
