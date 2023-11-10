@@ -15,13 +15,13 @@ const App = () => {
 	const [choiceP2, setchoiceP2] = useState(Unknown);
 	const [pointsP1, setpointsP1] = useState(0);
 	const [pointsP2, setpointsP2] = useState(0);
-	const [turn_p1,set_turn_p1]= useState("");
-	const [turn_p2,set_turn_p2]= useState("");
+	const [turn_p1, set_turn_p1] = useState("");
+	const [turn_p2, set_turn_p2] = useState("");
 	//const [round, setround] = useState(0);
 	const [modal_title, set_modal_title] = useState("");
 	const [modal_text, set_modal_text] = useState("");
 	const [remove_Loader, set_Remove_Loader] = useState(false);
-	const [modal_button_display, set_modal_button_display] = useState("");
+	const [modal_button_display, set_modal_button_display] = useState("none");
 	const [turn, set_turn] = useState(0);
 	const menu_Of_Choice = [
 		{
@@ -30,10 +30,10 @@ const App = () => {
 			title: "Hand Rock",
 			alt: "An image of a Hand Rock",
 			click: () => {
-				if (turn % 2 == 0) {
+				if (turn == 0) {
 					setchoice(HandRock);
 					set_turn_p1(HandRock)
-				} else if (turn % 2 != 0) {
+				} else {
 					setchoiceP2(HandRock);
 					set_turn_p2(HandRock)
 
@@ -46,11 +46,11 @@ const App = () => {
 			title: "Hand Open",
 			alt: "An image of a Hand Open",
 			click: () => {
-				if (turn % 2 == 0) {
+				if (turn == 0) {
 					setchoice(Hand);
 					set_turn_p1(Hand)
 
-				} else if (turn % 2 != 0) {
+				} else {
 					setchoiceP2(Hand);
 					set_turn_p2(Hand)
 
@@ -64,11 +64,11 @@ const App = () => {
 			title: "Hand Scissor",
 			alt: "An image of a Hand Scissor",
 			click: () => {
-				if (turn % 2 == 0) {
+				if (turn == 0) {
 					setchoice(HandScissors);
 					set_turn_p1(HandScissors)
 
-				} else if (turn % 2 != 0) {
+				} else {
 					setchoiceP2(HandScissors);
 					set_turn_p2(HandScissors)
 
@@ -79,22 +79,18 @@ const App = () => {
 	];
 	const menu_Of_Choice_List = menu_Of_Choice.map((e) => (
 		<li key={e.id}>
-		{" "}
-		<img src={e.image} title={e.title} alt={e.alt} onClick={e.click} />
-	</li>
+			{" "}
+			<img src={e.image} title={e.title} alt={e.alt} onClick={e.click} />
+		</li>
 	));
 
 	useEffect(() => {
-		verify_close_modal_to_check_turn()
+		verify_end_game()
 		setTimeout(() => {
 			change_turn_to_player_one()
 		}, 1000);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
-
-	useEffect(()=>{
-		console.log(turn)
-	},[turn])
 
 	useEffect(() => {
 		fetch("https://json-server-tim1.vercel.app/frases")
@@ -119,6 +115,7 @@ const App = () => {
 	const handle_modal = (none_or_block: string) => {
 		const modal = document.querySelector(".Modal_bg") as HTMLElement;
 		modal.style.display = none_or_block
+
 	}
 	const verify_end_game = () => {
 		const html_pointsP1 = document.querySelector("#html_pointsP1") as HTMLSpanElement;
@@ -209,29 +206,39 @@ const App = () => {
 		setpointsP1(pointsP1 + 1);
 		set_modal_title(winnerName);
 		handle_modal('block')
+		set_modal_button_display('block')
+		verify_close_modal()
 	};
 	const case_Drawn = (winnerName: string) => {
 		setpointsP2(pointsP1 + 0);
 		setpointsP2(pointsP2 + 0);
 		set_modal_title(winnerName);
 		handle_modal('block')
+		set_modal_button_display('block')
+		verify_close_modal()
+
+
 	};
 	const case_Loose = (winnerName: string) => {
 		setpointsP2(pointsP2 + 1);
 		set_modal_title(winnerName);
 		handle_modal('block')
+		set_modal_button_display('block')
+		verify_close_modal()
+
+
 
 	};
 
 	const disable_Button_Play_Game = () => {
 		const button_play_Game = document.querySelector("#button_Play_Game") as HTMLButtonElement;
 		button_play_Game?.setAttribute("Disabled", "");
-		button_play_Game.innerHTML="Jogar"
+		button_play_Game.innerHTML = "Jogar"
 	};
 
-	const change_name_button_play_game=(name:string)=>{
+	const change_name_button_play_game = (name: string) => {
 		const button_play_Game = document.querySelector("#button_Play_Game") as HTMLButtonElement;
-		button_play_Game.innerHTML=name
+		button_play_Game.innerHTML = name
 
 	}
 	const confirm_choose_p1 = () => {
@@ -245,43 +252,63 @@ const App = () => {
 	const change_turn_to_player_one = () => {
 		handle_modal("block")
 		set_modal_title("Vez do Player 1")
+		setTimeout(() => {
+			handle_modal('none')
+		}, 3000);
 
 	}
 	const change_turn_to_player_two = () => {
 		handle_modal("block")
 		set_modal_title("Vez do Player 2")
+		setTimeout(() => {
+			handle_modal("none")
+		}, 3000);
+		set_modal_button_display('none')
 	}
-	const handle_menu_of_choice=(none_or_block:string)=>{
+
+	const handle_menu_of_choice = (none_or_block: string) => {
 		const menu_Of_Choice_element = document.querySelector(".menu_Of_Choice") as HTMLElement;
-		menu_Of_Choice_element.style.display=none_or_block
+		menu_Of_Choice_element.style.display = none_or_block
 	}
-	const show_on_display_the_choose=()=>{
+	const show_on_display_the_choose = () => {
 		setchoice(turn_p1)
 		setchoiceP2(turn_p2)
 
 	}
 
-	const make_match=()=>{
+	const make_match = () => {
 		validate_Win_or_Loose()
 		show_on_display_the_choose()
 		handle_menu_of_choice('block')
 		change_name_button_play_game("Escolher")
-		verify_close_modal_to_check_turn()
+	}
+	const verify_close_modal = () => {
+		const button_submit_modal = document.querySelector("#button_submit_modal") as HTMLButtonElement
+		button_submit_modal.addEventListener("click", () => {
+			setTimeout(() => {
+				set_turn(0)
+			setchoice(Unknown)
+			setchoiceP2(Unknown)
 
+			}, 1000);
+		})
 	}
 	const button_play_Game = () => {
 		if (choice != Unknown) {
-			if(choice == check && choiceP2 == check){
+
+			if (choice == check && choiceP2 == check) {
 				make_match()
-			}else if (turn % 2 == 0) {
+			} else if (turn == 0) {
 				set_turn(turn + 1)
 				confirm_choose_p1()
 				change_turn_to_player_two()
-			} else if (turn % 2 != 0) {
+			} else if (turn == 1) {
 				set_turn(turn + 1)
 				confirm_choose_p2()
 				handle_menu_of_choice('none')
 				change_name_button_play_game('Jogar')
+			} else if (turn === 2) {
+				set_turn(0)
 			}
 
 		} else {
@@ -293,18 +320,6 @@ const App = () => {
 
 	};
 
-	const verify_close_modal_to_check_turn = () => {
-		const modal = document.querySelector(".Modal_bg") as HTMLElement;
-		modal.addEventListener("click",()=>{
-			if(turn == 2){
-				setchoice(Unknown)
-				setchoiceP2(Unknown)
-				set_turn(0)			
-		}
-		})
-			
-
-	}
 	return (
 		<>
 			<Modal title={modal_title} text={modal_text} display={modal_button_display} />
