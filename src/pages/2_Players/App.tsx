@@ -83,29 +83,32 @@ const App = () => {
 			<img src={e.image} title={e.title} alt={e.alt} onClick={e.click} />
 		</li>
 	));
-
 	useEffect(() => {
-		verify_end_game()
 		setTimeout(() => {
 			change_turn_to_player_one()
 		}, 1000);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
-
 	useEffect(() => {
+		verify_end_game()
+		set_Remove_Loader(true);
+
 		fetch("https://json-server-tim1.vercel.app/frases")
 			.then((response) => response.json())
 			.then((data) => {
 				const randomize = Math.floor(Math.random() * data.length);
 				set_modal_text(data[randomize].text);
-				set_Remove_Loader(true);
+
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [turn]);
-
 	const reset_game = () => {
 		setchoice(Unknown);
+		set_turn_p1(Unknown);
 		setchoiceP2(Unknown);
+		set_turn_p2(Unknown);
+
+		set_turn(0)
 		setpointsP1(0);
 		setpointsP2(0);
 		setTimeout(() => {
@@ -229,13 +232,11 @@ const App = () => {
 
 
 	};
-
 	const disable_Button_Play_Game = () => {
 		const button_play_Game = document.querySelector("#button_Play_Game") as HTMLButtonElement;
 		button_play_Game?.setAttribute("Disabled", "");
 		button_play_Game.innerHTML = "Jogar"
 	};
-
 	const change_name_button_play_game = (name: string) => {
 		const button_play_Game = document.querySelector("#button_Play_Game") as HTMLButtonElement;
 		button_play_Game.innerHTML = name
@@ -248,7 +249,6 @@ const App = () => {
 		setchoiceP2(check)
 
 	}
-
 	const change_turn_to_player_one = () => {
 		handle_modal("block")
 		set_modal_title("Vez do Player 1")
@@ -265,7 +265,6 @@ const App = () => {
 		}, 3000);
 		set_modal_button_display('none')
 	}
-
 	const handle_menu_of_choice = (none_or_block: string) => {
 		const menu_Of_Choice_element = document.querySelector(".menu_Of_Choice") as HTMLElement;
 		menu_Of_Choice_element.style.display = none_or_block
@@ -275,20 +274,20 @@ const App = () => {
 		setchoiceP2(turn_p2)
 
 	}
-
 	const make_match = () => {
 		validate_Win_or_Loose()
 		show_on_display_the_choose()
 		handle_menu_of_choice('block')
 		change_name_button_play_game("Escolher")
+
 	}
 	const verify_close_modal = () => {
 		const button_submit_modal = document.querySelector("#button_submit_modal") as HTMLButtonElement
 		button_submit_modal.addEventListener("click", () => {
 			setTimeout(() => {
 				set_turn(0)
-			setchoice(Unknown)
-			setchoiceP2(Unknown)
+				setchoice(Unknown)
+				setchoiceP2(Unknown)
 
 			}, 1000);
 		})
